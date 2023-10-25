@@ -5,6 +5,7 @@ import { useState } from "react"
 export default function Home() {
 
     const [file, setFile] = useState()
+    const [image, setImage] = useState(null)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -18,6 +19,7 @@ export default function Home() {
 
         const data = await response.json()
         console.log(data)
+        setImage(data.url)
     }
 
     const handleFileChange = (e) => {
@@ -42,6 +44,9 @@ export default function Home() {
                     Upload
                 </button>
                 </form>
+                {
+                    image && <img src={image} />
+                }
             </div>
         </div>
     )
