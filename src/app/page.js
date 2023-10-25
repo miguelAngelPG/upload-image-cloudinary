@@ -7,8 +7,17 @@ export default function Home() {
     const [file, setFile] = useState()
 
     const handleSubmit = async (e) => {
-        const data = new FormData()
-        data.set("file", file)
+        e.preventDefault()
+        const formData = new FormData()
+        formData.append("file", file)
+        
+        const response = await fetch("/api/upload", {
+            method: "POST",
+            body: formData
+        })
+
+        const data = await response.json()
+        console.log(data)
     }
 
     const handleFileChange = (e) => {
